@@ -4,11 +4,13 @@ import com.bits.dda.insurancemanagement.entities.Agent
 import com.bits.dda.insurancemanagement.entities.Customer
 import com.bits.dda.insurancemanagement.entities.Policy
 import com.bits.dda.insurancemanagement.entities.PolicyPlan
+import com.bits.dda.insurancemanagement.exception.RequestFailedException
 import com.bits.dda.insurancemanagement.repository.AgentRepository
 import com.bits.dda.insurancemanagement.repository.CustomerRepository
 import com.bits.dda.insurancemanagement.repository.PolicyPlanRepository
 import com.bits.dda.insurancemanagement.repository.PolicyRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 
 @Service
@@ -39,7 +41,11 @@ class PolicyService {
 
     Policy createOrUpdatePolicy(Policy policy) {
         PolicyPlan policyPlan = policyPlanRepository.findById(policy.policyPlanId).get()
-        Customer customer = customerRepository.findById(policy.customerId).get()
+        Optional<Customer> customer = customerRepository.findById(policy.customerId)
+        if(!customer.isPresent()){
+            throw new RequestFailedException("Customer Id does not exists  in the database: {$policy.customerId}", HttpStatus.BAD_REQUEST)
+        }
+
         Agent agent = agentRepository.findById(policy.agentid).get()
 
         policy.agent = agent

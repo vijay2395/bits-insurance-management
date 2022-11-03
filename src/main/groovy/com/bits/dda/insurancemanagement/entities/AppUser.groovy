@@ -1,9 +1,12 @@
 package com.bits.dda.insurancemanagement.entities
 
+import com.fasterxml.jackson.annotation.JsonInclude
+
 import javax.persistence.*
 
 @Entity
 @Table(name = "app_users")
+@JsonInclude(JsonInclude.Include.NON_NULL)
  class AppUser {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)

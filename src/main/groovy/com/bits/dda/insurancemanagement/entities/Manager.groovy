@@ -1,19 +1,29 @@
 package com.bits.dda.insurancemanagement.entities
 
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonInclude
+
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
+import javax.persistence.OneToMany
 import javax.persistence.Table
 
 @Entity
 @Table(name = "manager")
+@JsonInclude(JsonInclude.Include.NON_NULL)
  class Manager {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column(name = "Mgr_ID", nullable = false)
-     Integer id
+    @GeneratedValue (strategy = GenerationType.AUTO)
+    @Column(name = "mgr_id", nullable = false)
+     Integer managerId
+
+////    @OneToMany(mappedBy = "reportingManagerId")
+//    @OneToMany(mappedBy = "reportingManagerId", fetch = FetchType.LAZY, orphanRemoval = false)
+//    List<Agent> agents
 
     @Column(name = "Mgr_FName", nullable = false, length = 50)
      String mgrFname

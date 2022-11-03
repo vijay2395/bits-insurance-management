@@ -1,6 +1,6 @@
 package com.bits.dda.insurancemanagement.service
 
-
+import com.bits.dda.insurancemanagement.entities.Manager
 import com.bits.dda.insurancemanagement.entities.PolicyPlan
 import com.bits.dda.insurancemanagement.repository.PolicyPlanRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -22,5 +22,14 @@ class PolicyPlanService {
 
     PolicyPlan createOrUpdatePolicyPlan(PolicyPlan policyPlan) {
         policyPlanRepository.save(policyPlan)
+     }
+
+     List<PolicyPlan> getAllPolicyPlans() {
+         List<PolicyPlan> policyPlanList = policyPlanRepository.findAll().collect()
+         if(policyPlanList.size() > 0 ){
+             return policyPlanList
+         }
+         return null
+
      }
 }

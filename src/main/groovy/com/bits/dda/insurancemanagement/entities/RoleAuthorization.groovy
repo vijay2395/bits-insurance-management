@@ -1,12 +1,16 @@
 package com.bits.dda.insurancemanagement.entities
 
+import com.fasterxml.jackson.annotation.JsonInclude
+
 import javax.persistence.*
 
 @Entity
 @Table(name = "role_authorization")
+@JsonInclude(JsonInclude.Include.NON_NULL)
  class RoleAuthorization {
     @Id
     @Column(name = "Auth_ID", nullable = false)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer id
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

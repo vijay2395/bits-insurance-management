@@ -1,39 +1,47 @@
 package com.bits.dda.insurancemanagement.entities
 
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonInclude
+import org.hibernate.annotations.OnDelete
+
 import javax.persistence.*
 
 @Entity
 @Table(name = "agent")
+@JsonInclude(JsonInclude.Include.NON_NULL)
  class Agent {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.AUTO)
     @Column(name = "Agent_ID", nullable = false)
-     Integer id
+     Integer agentId
 
     @Column(name = "Agent_FName", nullable = false, length = 50)
-     String agentFname
+     String firstName
 
     @Column(name = "Agent_LName", nullable = false, length = 50)
-     String agentLname
+     String lastName
 
     @Column(name = "Agent_Mobile", nullable = false, length = 15)
-     String agentMobile
+     String mobileNumber
 
     @Column(name = "Agent_Landline", length = 15)
-     String agentLandline
+     String landlineNumber
 
     @Column(name = "Email_Address", nullable = false, length = 50)
-     String emailAddress
+     String email
 
     @Column(name = "Office_Phone", length = 15)
      String officePhone
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @Column(name = "Reporting_Mgr_ID")
+    Integer reportingManagerId
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "Reporting_Mgr_ID", nullable = false)
-    //@Column(name = "Reporting_Mgr_ID", nullable = false, length = 15)
-    Manager reportingMgr
+    @JsonIgnore
+    Manager manager
 
     @Column(name = "App_pwd", nullable = false, length = 15)
-     String appPwd
+     String password
 
 }

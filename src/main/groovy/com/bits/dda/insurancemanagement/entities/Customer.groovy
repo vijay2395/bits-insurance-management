@@ -1,6 +1,7 @@
 package com.bits.dda.insurancemanagement.entities
 
 import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonInclude
 
 import javax.persistence.*
 import java.time.LocalDate
@@ -8,10 +9,11 @@ import java.time.LocalDate
 @Entity
 @Table(name = "customer")
  class Customer {
+
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.AUTO)
     @Column(name = "Cust_ID", nullable = false)
-     Integer id
+     Integer customerId
 
     @Column(name = "Cust_FName", nullable = false, length = 50)
      String firstName
@@ -20,10 +22,10 @@ import java.time.LocalDate
      String lastName
 
     @Column(name = "Cust_Mobile", nullable = false, length = 15)
-     String mobile
+     String mobileNumber
 
     @Column(name = "Cust_Landline", length = 15)
-     String landline
+     String landlineNumber
 
     @Column(name = "Cust_Address", nullable = false, length = 50)
      String address
@@ -32,13 +34,13 @@ import java.time.LocalDate
      String city
 
     @Column(name = "Cust_Pincode", length = 10)
-     String pincode
+     String pinCode
 
     @Column(name = "Cust_State", nullable = false, length = 20)
      String state
 
     @Column(name = "Cust_Date_of_Birth", nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     LocalDate dateOfBirth
 
     @Column(name = "Cust_Email", nullable = false, length = 50)

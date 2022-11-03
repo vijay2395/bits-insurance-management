@@ -10,10 +10,20 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
+@CrossOrigin(origins = "*")
 class CustomerController {
 
     @Autowired
     CustomerService customerService
+
+    @GetMapping(path = "/customer")
+    ResponseEntity<List<Customer>> getallCustomers(){
+        List<Customer> customerFromDb = customerService.getAllCustomers()
+        if(!customerFromDb){
+            throw new RequestFailedException('customer creation failed!', HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+        return ResponseEntity.ok(customerFromDb)
+    }
 
     @PostMapping(path = "/customer")
     ResponseEntity<Customer> createCustomer(@RequestBody Customer customer){

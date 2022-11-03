@@ -42,4 +42,10 @@ class CustomerController {
         }
         return ResponseEntity.ok(customerFromDb)
     }
+
+    @DeleteMapping(path = "/customer/{id}")
+    ResponseEntity<String> deleteCustomer(@PathVariable('id') Integer id){
+        customerService.deleteCustomerById(id)
+        return ResponseEntity.ok('Deleted!')
+    }
 }

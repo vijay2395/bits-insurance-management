@@ -32,4 +32,8 @@ class CustomerService {
          }
          return null
      }
+
+     void deleteCustomerById(Integer id) {
+         customerRepository.deleteById(id)
+     }
 }

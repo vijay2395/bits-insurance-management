@@ -13,7 +13,7 @@ import java.time.LocalDate
  class Policy {
     @Id
     @Column(name = "Pol_ID", nullable = false)
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.AUTO)
     Integer policyId
 
     Integer policyPlanId
